@@ -7,10 +7,10 @@ const secretsList = document.getElementById('secretsList');
 const toggleLoad = () => {
     if (spinner.style.display !== 'block') {
         spinner.style.display = 'block';
-        form.style.display = 'none'
+        secretsList.style.display = 'none'
     } else {
         spinner.style.display = 'none';
-        form.style.display = 'block'
+        secretsList.style.display = 'block'
     }
 }
 const newHTMLelement = (dataObj) => {
@@ -25,6 +25,7 @@ const newHTMLelement = (dataObj) => {
     secretsList.appendChild(div);
 }
 
+toggleLoad();
 fetch(apiURL('secrets'), {
     method: 'GET',
 })
@@ -34,4 +35,5 @@ fetch(apiURL('secrets'), {
         data.forEach(secret => {
             newHTMLelement(secret);
         });
-    })
+        toggleLoad();
+    });
